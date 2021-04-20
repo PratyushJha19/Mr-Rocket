@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class Rocket : MonoBehaviour
 {
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -22,9 +22,9 @@ public class Rocket : MonoBehaviour
             print("You pressed space");
 
         else if (Input.GetKey(KeyCode.A))
-            print("Rotating Right");
+            print("Rotating left");
 
         else if (Input.GetKey(KeyCode.D))
-            print("Rotating left");
+            print("Rotating Right");
     }
 }
