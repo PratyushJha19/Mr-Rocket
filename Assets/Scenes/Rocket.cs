@@ -31,26 +31,35 @@ public class Rocket : MonoBehaviour
   //rigidBody is the variable name used here. Any variable name can be used here at its place.
     void OnUserInput()
     {
-        if (Input.GetKey(KeyCode.A))
-            transform.Rotate(Vector3.forward);
-
-        else if (Input.GetKey(KeyCode.D))
-            transform.Rotate(Vector3.back);
-
-        else if (Input.GetKey(KeyCode.W))
-        {   
-            rigidBody.AddRelativeForce(Vector3.up);   
+      if (Input.GetKey(KeyCode.W))
+      {
+            rigidBody.AddRelativeForce(Vector3.up);
             if (!audioSource.isPlaying) //here '!' means not. Here not can also be shown as '(audio.isPlaying == false)'.
                 audioSource.Play();
-        }
+      }
 
         else if (Input.GetKey(KeyCode.S))
             rigidBody.AddRelativeForce(Vector3.down);
+
+        else if (Input.GetKey(KeyCode.A))
+        {
+            rigidBody.AddRelativeForce(Vector3.left);
+            if (!audioSource.isPlaying)
+                audioSource.Play();
+        }
+
+        else if (Input.GetKey(KeyCode.D))
+        {
+            rigidBody.AddRelativeForce(Vector3.right);
+            if (!audioSource.isPlaying)
+                audioSource.Play();
+        }
 
         else
             audioSource.Stop();
 
         OnUserInput2();
+        PlayerRotation();
     }
          
     void OnUserInput2()
@@ -63,5 +72,15 @@ public class Rocket : MonoBehaviour
             print("Going Left");
         else if (Input.GetKey(KeyCode.S))
             print("Going Down");
+    }
+    void PlayerRotation()
+    {
+        rigidBody.freezeRotation = true; // for taking manual rotation control
+        if (Input.GetKey(KeyCode.Q))
+            transform.Rotate(Vector3.forward);
+
+        else if (Input.GetKey(KeyCode.E))
+            transform.Rotate(Vector3.back);
+        rigidBody.freezeRotation = false; // giving rotation control back to physics
     }
 }
