@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
-    Rigidbody rigidBody; // 'Rigidbody' is a variable type provided by unity.
-    // 'rigidBody' is the name of a member variable of type 'Rigidbody'.
-    
+    AudioSource audioSource;
+    Rigidbody rigidBody;
+ //'Rigidbody' is a variable type provided by unity. As it is a component added by us in the unity Engine
+ // 'rigidBody' is the name of a member variable of type 'Rigidbody'.
+
     // Start is called before the first frame update
     void Start()
-    {
-        rigidBody = GetComponent<Rigidbody>(); //not explained in the course, yet. 
-    }
-
+    {//Here we are telling machine to take value from Component Added in the engine for 'rigidBody'
+     //'GetComponent<Rigidbody>();'is the syntax for the statement above
+     //'GetComponent<>();' is a function for taking a value from a component added to the game object
+     // Returns the component of Type if the game object has one attached, null if it doesn't.
+        rigidBody = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
+    }    
+  
     // Update is called once per frame
     void Update()
     {
@@ -26,21 +32,38 @@ public class Rocket : MonoBehaviour
     void OnUserInput()
     {
         if (Input.GetKey(KeyCode.Space))
-            print("You pressed space");
-
-       else if (Input.GetKey(KeyCode.A))
-            rigidBody.AddRelativeForce(Vector3.left);
-
-       else if (Input.GetKey(KeyCode.D))
-            rigidBody.AddRelativeForce(Vector3.right);
-
-       else if (Input.GetKey(KeyCode.W))
+        {
             rigidBody.AddRelativeForce(Vector3.up);
-        
-       else if (Input.GetKey(KeyCode.S))
+            AudioOnUSerInput();
+        }
+
+        else if (Input.GetKey(KeyCode.A))
+            transform.Rotate(Vector3.forward);
+
+        else if (Input.GetKey(KeyCode.D))
+            transform.Rotate(Vector3.back);
+
+        else if (Input.GetKey(KeyCode.W))
+        {   
+            rigidBody.AddRelativeForce(Vector3.up);   
+            if (!audioSource.isPlaying) //here '!' means not. Here not can also be shown as '(audio.isPlaying == false)'.
+                audioSource.Play();
+        }
+
+        else if (Input.GetKey(KeyCode.S))
             rigidBody.AddRelativeForce(Vector3.down);
-       OnUserInput2();
+
+        else
+            audioSource.Stop();
+
+        OnUserInput2();
     }
+    void AudioOnUSerInput() 
+    {
+        if (!audioSource.isPlaying) //here '!' means not. Here not can also be shown as '(audio.isPlaying == false)'.
+            audioSource.Play();
+    }
+         
 
     void OnUserInput2()
     {
