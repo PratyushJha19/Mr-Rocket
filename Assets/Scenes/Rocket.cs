@@ -31,13 +31,7 @@ public class Rocket : MonoBehaviour
   //rigidBody is the variable name used here. Any variable name can be used here at its place.
     void OnUserInput()
     {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            rigidBody.AddRelativeForce(Vector3.up);
-            AudioOnUSerInput();
-        }
-
-        else if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
             transform.Rotate(Vector3.forward);
 
         else if (Input.GetKey(KeyCode.D))
@@ -58,13 +52,7 @@ public class Rocket : MonoBehaviour
 
         OnUserInput2();
     }
-    void AudioOnUSerInput() 
-    {
-        if (!audioSource.isPlaying) //here '!' means not. Here not can also be shown as '(audio.isPlaying == false)'.
-            audioSource.Play();
-    }
          
-
     void OnUserInput2()
     {
         if (Input.GetKey(KeyCode.W))
