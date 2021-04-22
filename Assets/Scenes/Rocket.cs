@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
-    AudioSource audioSource;
-    Rigidbody rigidBody;
+    //Member Variables Declared Below
+    //The [SerializeField] attribute is used to mark non-public fields as serializable: so that Unity can save and load those values
+    [SerializeField] float mainThrust = 100f;
+    [SerializeField] float rcsThrust = 100f; //"[SerializeFlield]" is to load values in the engine with the name of variable declared
+    AudioSource audioSource;// It is same as Rigidbody
+    Rigidbody rigidBody; 
  //'Rigidbody' is a variable type provided by unity. As it is a component added by us in the unity Engine
  // 'rigidBody' is the name of a member variable of type 'Rigidbody'.
 
     // Start is called before the first frame update
     void Start()
     {//Here we are telling machine to take value from Component Added in the engine for 'rigidBody'
-     //'GetComponent<Rigidbody>();'is the syntax for the statement above
      //'GetComponent<>();' is a function for taking a value from a component added to the game object
      // Returns the component of Type if the game object has one attached, null if it doesn't.
         rigidBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
-    }    
-  
+        //'GetComponent<Rigidbody>();'is the syntax for the statement above
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -31,56 +35,62 @@ public class Rocket : MonoBehaviour
   //rigidBody is the variable name used here. Any variable name can be used here at its place.
     void OnUserInput()
     {
+        float movementOfFrame = mainThrust * Time.deltaTime; 
       if (Input.GetKey(KeyCode.W))
       {
-            rigidBody.AddRelativeForce(Vector3.up);
+            rigidBody.AddRelativeForce(Vector3.up * movementOfFrame);
             if (!audioSource.isPlaying) //here '!' means not. Here not can also be shown as '(audio.isPlaying == false)'.
                 audioSource.Play();
       }
 
         else if (Input.GetKey(KeyCode.S))
-            rigidBody.AddRelativeForce(Vector3.down);
+            rigidBody.AddRelativeForce(Vector3.down * movementOfFrame);
 
         else if (Input.GetKey(KeyCode.A))
         {
-            rigidBody.AddRelativeForce(Vector3.left);
+            rigidBody.AddRelativeForce(Vector3.left * movementOfFrame);
             if (!audioSource.isPlaying)
                 audioSource.Play();
         }
 
         else if (Input.GetKey(KeyCode.D))
         {
-            rigidBody.AddRelativeForce(Vector3.right);
+            rigidBody.AddRelativeForce(Vector3.right * movementOfFrame);
             if (!audioSource.isPlaying)
                 audioSource.Play();
         }
 
         else
             audioSource.Stop();
-
-        OnUserInput2();
+        
         PlayerRotation();
     }
          
-    void OnUserInput2()
-    {
-        if (Input.GetKey(KeyCode.W))
-            print("Take Off");
-        else if (Input.GetKey(KeyCode.D))
-            print("Going Right");
-        else if (Input.GetKey(KeyCode.A))
-            print("Going Left");
-        else if (Input.GetKey(KeyCode.S))
-            print("Going Down");
-    }
     void PlayerRotation()
     {
+        float rotationOfFrame = rcsThrust * Time.deltaTime;
         rigidBody.freezeRotation = true; // for taking manual rotation control
         if (Input.GetKey(KeyCode.Q))
-            transform.Rotate(Vector3.forward);
+            transform.Rotate(Vector3.forward * rotationOfFrame);
 
         else if (Input.GetKey(KeyCode.E))
-            transform.Rotate(Vector3.back);
+            transform.Rotate(Vector3.back * rotationOfFrame);
         rigidBody.freezeRotation = false; // giving rotation control back to physics
+    }
+    // 'Collison' is a variable type provided by unity for collision of any game object
+    void OnCollisionEnter(Collision collision)//Tagging Game Objects,Syntax-'(variableName.gameObject.tag)'
+    {// For Tagging we give the game object a Tag name, and to make it respond on an input we use switch statement
+        switch (collision.gameObject.tag)
+        {
+            case "Friendly":
+                print("Friendly");
+                break;
+            case "Friendly Obstacle":
+                print("OK");
+                break;
+            default:
+                print("Dead");
+                break;
+        }
     }
 }

@@ -266,7 +266,7 @@ Transform:
   m_GameObject: {fileID: 990915439473110672}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 7.2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.548451, y: 3.099, z: 1.3225}
   m_Children:
   - {fileID: 4610195308534914888}
   - {fileID: 7744662723266659864}
@@ -287,9 +287,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 990915439473110672}
   serializedVersion: 2
-  m_Mass: 0.14
-  m_Drag: 2
-  m_AngularDrag: 2
+  m_Mass: 1
+  m_Drag: 0.2
+  m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -307,7 +307,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 79794fa502a983d40a44770f33367d68, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.35
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -416,6 +416,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d49c3d2e1f330b843b744689aaa259be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainThrust: 2500
+  rcsThrust: 250
 --- !u!1 &2466778920022748977
 GameObject:
   m_ObjectHideFlags: 0
