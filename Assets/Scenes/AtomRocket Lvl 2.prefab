@@ -248,10 +248,10 @@ GameObject:
   - component: {fileID: 8963174565439094750}
   - component: {fileID: 1166208618532147547}
   - component: {fileID: -5441407314154071740}
-  - component: {fileID: 3163970157191028515}
   - component: {fileID: 6686143778392319305}
+  - component: {fileID: -1271204230288752976}
   m_Layer: 0
-  m_Name: AtomRocket
+  m_Name: AtomRocket Lvl 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -266,7 +266,7 @@ Transform:
   m_GameObject: {fileID: 990915439473110672}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 7.2, z: 0}
-  m_LocalScale: {x: 2.548451, y: 3.099, z: 1.3225}
+  m_LocalScale: {x: 4.251326, y: 5.293826, z: 3.745677}
   m_Children:
   - {fileID: 4610195308534914888}
   - {fileID: 7744662723266659864}
@@ -391,19 +391,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &3163970157191028515
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 990915439473110672}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.2712214, y: 7.7735815, z: 4.1125693}
-  m_Center: {x: 0, y: 0.2682271, z: -0.23913932}
 --- !u!114 &6686143778392319305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -418,6 +405,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainThrust: 2500
   rcsThrust: 250
+--- !u!65 &-1271204230288752976
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990915439473110672}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.3689485, y: 6.743265, z: 3.1210296}
+  m_Center: {x: 0, y: 0.81912434, z: 0}
 --- !u!1 &2466778920022748977
 GameObject:
   m_ObjectHideFlags: 0
