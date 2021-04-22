@@ -78,9 +78,9 @@ public class Rocket : MonoBehaviour
         rigidBody.freezeRotation = false; // giving rotation control back to physics
     }
     // 'Collison' is a variable type provided by unity for collision of any game object
-    void OnCollisionEnter(Collision collision)//Tagging Game Objects,Syntax-'(variableName.gameObject.tag)'
+    void OnCollisionEnter(Collision collision)// Method to respond on collision
     {// For Tagging we give the game object a Tag name, and to make it respond on an input we use switch statement
-        switch (collision.gameObject.tag)
+        switch (collision.gameObject.tag)//Tagging Game Objects,Syntax-'(variableName.gameObject.tag)'
         {
             case "Friendly":
                 print("Friendly");
