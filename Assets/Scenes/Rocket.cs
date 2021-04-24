@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine;// It provides methods, variables, and variable type In unity Engine, so we dont need to define those things as it is already there. 
+using UnityEngine.SceneManagement;//'UnityEngine.SceneManagement' is for managing scenes
 
 public class Rocket : MonoBehaviour
-{
-    //Member Variables Declared Below
+{   //Member Variables Declared Below
     //The [SerializeField] attribute is used to mark non-public fields as serializable: so that Unity can save and load those values
     [SerializeField] float mainThrust = 100f;
     [SerializeField] float rcsThrust = 100f; //"[SerializeFlield]" is to load values in the engine with the name of variable declared
@@ -12,6 +12,8 @@ public class Rocket : MonoBehaviour
     Rigidbody rigidBody; 
  //'Rigidbody' is a variable type provided by unity. As it is a component added by us in the unity Engine
  // 'rigidBody' is the name of a member variable of type 'Rigidbody'.
+  enum State { Alive, Dying, Transcending}
+    State state = State.Alive;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +28,11 @@ public class Rocket : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        OnUserInput();
+        if (state == State.Alive)
+        {
+            OnUserInput();
+            PlayerRotation();
+        }
     }
   //"(Input.GetKey(KeyCode.Input))" is the syntax for getting the input from the user
   //"Input. GetKey" will repeatedly return the value which the user holds down the specified key.
@@ -42,7 +48,6 @@ public class Rocket : MonoBehaviour
             if (!audioSource.isPlaying) //here '!' means not. Here not can also be shown as '(audio.isPlaying == false)'.
                 audioSource.Play();
       }
-
         else if (Input.GetKey(KeyCode.S))
             rigidBody.AddRelativeForce(Vector3.down * movementOfFrame);
 
@@ -78,19 +83,45 @@ public class Rocket : MonoBehaviour
         rigidBody.freezeRotation = false; // giving rotation control back to physics
     }
     // 'Collison' is a variable type provided by unity for collision of any game object
-    void OnCollisionEnter(Collision collision)// Method to respond on collision
+    void OnCollisionEnter(Collision collision)// Method to respond on collision provided by Unity
     {// For Tagging we give the game object a Tag name, and to make it respond on an input we use switch statement
+        
+        if (state != State.Alive)// '!=' - it is 'not equal to'
+        {
+            return;//'return' is a command telling the method not to give output further than that if the condition follows
+        }
+
         switch (collision.gameObject.tag)//Tagging Game Objects,Syntax-'(variableName.gameObject.tag)'
         {
-            case "Friendly":
-                print("Friendly");
+            case "Friendly": 
                 break;
             case "Friendly Obstacle":
-                print("OK");
+                break;
+            case "Finish":
+                state = State.Transcending;
+                Invoke("ChangingScene", 2f);
+         // 'Invoke' is a key word to execute a method after some time
+         //Syntax to use invoke 'Invoke("MethodName", Time);' (Time should be in seconds and the value should be a float value)
+                print("Finish");
                 break;
             default:
                 print("Dead");
+                state = State.Dying;
+                Invoke("ChangingScene2", 2f);
                 break;
         }
+    }
+
+    void ChangingScene2()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    void ChangingScene()
+    {
+        SceneManager.LoadScene(1);
+     //'SceneManager' is to use the 'UnityEngine.SceneManagement' package, which is for managemnt of the scenes added to builded scenes
+     //'.LoadScene()' is a command given to the system to load the scene number specified in the bracket
+     // syntax to change scene in unity 'SceneManager.LoadScene();'
     }
 }

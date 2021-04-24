@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4147695682858492682}
   m_Layer: 0
   m_Name: Landing Pad
-  m_TagString: Friendly
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3457192356666267211}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 59, y: 3, z: 3}
-  m_LocalScale: {x: 15.007298, y: 5.4141, z: 6.7295203}
+  m_LocalScale: {x: 167.3984, y: 32.119694, z: 289.73215}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ec8c6a1ebc3cc924da6d3585e54d4819, type: 2}
+  - {fileID: 2100000, guid: b1617e6d420f49642b8ae3fe43e94b71, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

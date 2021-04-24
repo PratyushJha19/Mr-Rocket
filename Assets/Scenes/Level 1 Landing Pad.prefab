@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 268635708244340420}
   m_Layer: 0
   m_Name: Level 1 Landing Pad
-  m_TagString: Untagged
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,9 +26,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6295853143220039764}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 192, y: 30, z: 0.23553848}
-  m_LocalScale: {x: 79.38242, y: 1.5546716, z: 17.845472}
+  m_LocalScale: {x: 73.83588, y: 1.5546716, z: 27.03232}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -56,10 +56,11 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ec8c6a1ebc3cc924da6d3585e54d4819, type: 2}
+  - {fileID: 2100000, guid: b1617e6d420f49642b8ae3fe43e94b71, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -80,6 +81,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &268635708244340420
 BoxCollider:
   m_ObjectHideFlags: 0

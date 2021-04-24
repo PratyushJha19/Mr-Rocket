@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Friendly
   - Friendly Obstacle
+  - Friendly Obstacle2
   layers:
   - Default
   - TransparentFX
