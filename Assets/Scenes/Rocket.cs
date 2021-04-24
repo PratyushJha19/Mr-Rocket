@@ -8,8 +8,18 @@ public class Rocket : MonoBehaviour
     //The [SerializeField] attribute is used to mark non-public fields as serializable: so that Unity can save and load those values
     [SerializeField] float mainThrust = 100f;
     [SerializeField] float rcsThrust = 100f; //"[SerializeFlield]" is to load values in the engine with the name of variable declared
+    
+    [SerializeField] AudioClip mainEngine; //AudioClip is a Variable type Given by unity which itself takes audio in the engine not values
+    [SerializeField] AudioClip deathAudio;
+    [SerializeField] AudioClip levelclear;
+
+    [SerializeField] ParticleSystem mainEngineParticles;
+    [SerializeField] ParticleSystem successParticles;
+    [SerializeField] ParticleSystem deathParticles;
+
     AudioSource audioSource;// It is same as Rigidbody
-    Rigidbody rigidBody; 
+    Rigidbody rigidBody;
+    ParticleSystem RocketJetParticles;
  //'Rigidbody' is a variable type provided by unity. As it is a component added by us in the unity Engine
  // 'rigidBody' is the name of a member variable of type 'Rigidbody'.
   enum State { Alive, Dying, Transcending}
@@ -41,13 +51,16 @@ public class Rocket : MonoBehaviour
   //rigidBody is the variable name used here. Any variable name can be used here at its place.
     void OnUserInput()
     {
-        float movementOfFrame = mainThrust * Time.deltaTime; 
-      if (Input.GetKey(KeyCode.W))
-      {
+        float movementOfFrame = mainThrust * Time.deltaTime;
+        if (Input.GetKey(KeyCode.W))
+        {
             rigidBody.AddRelativeForce(Vector3.up * movementOfFrame);
             if (!audioSource.isPlaying) //here '!' means not. Here not can also be shown as '(audio.isPlaying == false)'.
-                audioSource.Play();
-      }
+            {
+                audioSource.PlayOneShot(mainEngine); //To remember - for playing an audio added in the engine inspector use '.PlayOneshot(variableName)'
+            }
+            mainEngineParticles.Play();
+        }
         else if (Input.GetKey(KeyCode.S))
             rigidBody.AddRelativeForce(Vector3.down * movementOfFrame);
 
@@ -66,8 +79,9 @@ public class Rocket : MonoBehaviour
         }
 
         else
+        {            
             audioSource.Stop();
-        
+        }
         PlayerRotation();
     }
          
@@ -82,6 +96,7 @@ public class Rocket : MonoBehaviour
             transform.Rotate(Vector3.back * rotationOfFrame);
         rigidBody.freezeRotation = false; // giving rotation control back to physics
     }
+
     // 'Collison' is a variable type provided by unity for collision of any game object
     void OnCollisionEnter(Collision collision)// Method to respond on collision provided by Unity
     {// For Tagging we give the game object a Tag name, and to make it respond on an input we use switch statement
@@ -98,18 +113,32 @@ public class Rocket : MonoBehaviour
             case "Friendly Obstacle":
                 break;
             case "Finish":
-                state = State.Transcending;
-                Invoke("ChangingScene", 2f);
-         // 'Invoke' is a key word to execute a method after some time
-         //Syntax to use invoke 'Invoke("MethodName", Time);' (Time should be in seconds and the value should be a float value)
-                print("Finish");
+                LevelClearSequence();
                 break;
             default:
-                print("Dead");
-                state = State.Dying;
-                Invoke("ChangingScene2", 2f);
+                 DeathSequence();
                 break;
         }
+    }
+
+    void DeathSequence()
+    {
+        print("Dead");
+        state = State.Dying;
+        deathParticles.Play();
+        audioSource.Stop();
+        audioSource.PlayOneShot(deathAudio);
+        Invoke("ChangingScene2", 2f);
+    }
+
+    void LevelClearSequence()
+    {
+        state = State.Transcending;//'Invoke' is a key word to execute a method after some time        
+        audioSource.Stop();
+        audioSource.PlayOneShot(levelclear);
+        successParticles.Play();
+        Invoke("ChangingScene", 2f);//Syntax to use invoke 'Invoke("MethodName", Time);' (Time should be in seconds and the value should be a float value)
+        print("Finish");
     }
 
     void ChangingScene2()
@@ -124,4 +153,5 @@ public class Rocket : MonoBehaviour
      //'.LoadScene()' is a command given to the system to load the scene number specified in the bracket
      // syntax to change scene in unity 'SceneManager.LoadScene();'
     }
+
 }
