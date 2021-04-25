@@ -125,6 +125,24 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &1233729128 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1720962407519147324, guid: 60ea102c3f21fdd43b568804c7a885f6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1720962408041621407}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1233729130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1233729128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c22e483de8c936e458242887d5f35fc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1691489322
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -275,6 +293,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: All Obstacles
+      objectReference: {fileID: 0}
+    - target: {fileID: 1720962407519147320, guid: 60ea102c3f21fdd43b568804c7a885f6,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.08197592
+      objectReference: {fileID: 0}
+    - target: {fileID: 1720962407519147320, guid: 60ea102c3f21fdd43b568804c7a885f6,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.9966343
+      objectReference: {fileID: 0}
+    - target: {fileID: 1720962407519147320, guid: 60ea102c3f21fdd43b568804c7a885f6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -170.596
       objectReference: {fileID: 0}
     - target: {fileID: 1720962407519147323, guid: 60ea102c3f21fdd43b568804c7a885f6,
         type: 3}
