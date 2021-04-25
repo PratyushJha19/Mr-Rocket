@@ -414,6 +414,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainThrust: 8000
   rcsThrust: 250
+  LevelLoadTime: 2
   mainEngine: {fileID: 8300000, guid: 2d6a96d0e0843b1499a51affd9cd98f2, type: 3}
   deathAudio: {fileID: 8300000, guid: 6609f78a170d92d4ab12e7aba9b33255, type: 3}
   levelclear: {fileID: 8300000, guid: 84ef720f8924f2342b34c72873522d6e, type: 3}
@@ -855,15 +856,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4100699973242056, guid: 62198a3a5dbb64a4f9e1618929224faa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.150197
+      value: 80.915924
       objectReference: {fileID: 0}
     - target: {fileID: 4100699973242056, guid: 62198a3a5dbb64a4f9e1618929224faa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.1
+      value: 3.0859156
       objectReference: {fileID: 0}
     - target: {fileID: 4100699973242056, guid: 62198a3a5dbb64a4f9e1618929224faa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.127295
+      value: -2.2538567
       objectReference: {fileID: 0}
     - target: {fileID: 4100699973242056, guid: 62198a3a5dbb64a4f9e1618929224faa, type: 3}
       propertyPath: m_LocalRotation.w

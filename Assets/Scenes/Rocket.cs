@@ -8,7 +8,8 @@ public class Rocket : MonoBehaviour
     //The [SerializeField] attribute is used to mark non-public fields as serializable: so that Unity can save and load those values
     [SerializeField] float mainThrust = 100f;
     [SerializeField] float rcsThrust = 100f; //"[SerializeFlield]" is to load values in the engine with the name of variable declared
-    
+    [SerializeField] float LevelLoadTime = 2f;
+
     [SerializeField] AudioClip mainEngine; //AudioClip is a Variable type Given by unity which itself takes audio in the engine not values
     [SerializeField] AudioClip deathAudio;
     [SerializeField] AudioClip levelclear;
@@ -66,14 +67,14 @@ public class Rocket : MonoBehaviour
 
         else if (Input.GetKey(KeyCode.A))
         {
-            rigidBody.AddRelativeForce(Vector3.left * movementOfFrame);
+            rigidBody.AddRelativeForce(Vector3.right * movementOfFrame);
             if (!audioSource.isPlaying)
                 audioSource.Play();
         }
 
         else if (Input.GetKey(KeyCode.D))
         {
-            rigidBody.AddRelativeForce(Vector3.right * movementOfFrame);
+            rigidBody.AddRelativeForce(Vector3.left * movementOfFrame);
             if (!audioSource.isPlaying)
                 audioSource.Play();
         }
@@ -90,10 +91,10 @@ public class Rocket : MonoBehaviour
         float rotationOfFrame = rcsThrust * Time.deltaTime;
         rigidBody.freezeRotation = true; // for taking manual rotation control
         if (Input.GetKey(KeyCode.Q))
-            transform.Rotate(Vector3.forward * rotationOfFrame);
+            transform.Rotate(Vector3.back * rotationOfFrame);
 
         else if (Input.GetKey(KeyCode.E))
-            transform.Rotate(Vector3.back * rotationOfFrame);
+            transform.Rotate(Vector3.forward * rotationOfFrame);
         rigidBody.freezeRotation = false; // giving rotation control back to physics
     }
 
@@ -112,8 +113,20 @@ public class Rocket : MonoBehaviour
                 break;
             case "Friendly Obstacle":
                 break;
-            case "Finish":
-                LevelClearSequence();
+            case "Finish 1":
+                GoToLevel2();
+                break;
+            case "Finish 2":
+                GoToLevel3();
+                break;
+            case "Finish 3":
+                GoToLevel4();
+                break;
+            case "Finish 4":
+                GoToLevel5();
+                break;
+            case "Finish 5":
+                GoToLevel5();
                 break;
             default:
                  DeathSequence();
@@ -128,10 +141,10 @@ public class Rocket : MonoBehaviour
         deathParticles.Play();
         audioSource.Stop();
         audioSource.PlayOneShot(deathAudio);
-        Invoke("ChangingScene2", 2f);
+        Invoke("ChangingScene2", LevelLoadTime);
     }
 
-    void LevelClearSequence()
+    void GoToLevel2()
     {
         state = State.Transcending;//'Invoke' is a key word to execute a method after some time        
         audioSource.Stop();
@@ -153,5 +166,47 @@ public class Rocket : MonoBehaviour
      //'.LoadScene()' is a command given to the system to load the scene number specified in the bracket
      // syntax to change scene in unity 'SceneManager.LoadScene();'
     }
+    void GoToLevel3()
+    {
+        state = State.Transcending;//'Invoke' is a key word to execute a method after some time        
+        audioSource.Stop();
+        audioSource.PlayOneShot(levelclear);
+        successParticles.Play();
+        Invoke("ChangingScene3", 2f);//Syntax to use invoke 'Invoke("MethodName", Time);' (Time should be in seconds and the value should be a float value)
+        print("Finish");
+    }
 
+    void ChangingScene3()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    void GoToLevel4()
+    {
+        state = State.Transcending;//'Invoke' is a key word to execute a method after some time        
+        audioSource.Stop();
+        audioSource.PlayOneShot(levelclear);
+        successParticles.Play();
+        Invoke("ChangingScene4", 2f);//Syntax to use invoke 'Invoke("MethodName", Time);' (Time should be in seconds and the value should be a float value)
+        print("Finish");
+    }
+    void ChangingScene4()
+    {
+        SceneManager.LoadScene(3);
+    }
+
+    void GoToLevel5()
+    {
+        state = State.Transcending;//'Invoke' is a key word to execute a method after some time        
+        audioSource.Stop();
+        audioSource.PlayOneShot(levelclear);
+        successParticles.Play();
+        Invoke("ChangingScene5", 2f);//Syntax to use invoke 'Invoke("MethodName", Time);' (Time should be in seconds and the value should be a float value)
+        print("Finish");
+    }
+
+    void ChangingScene5()
+    {
+        SceneManager.LoadScene(4);
+    }
 }
