@@ -21,11 +21,12 @@ public class Rocket : MonoBehaviour
     AudioSource audioSource;// It is same as Rigidbody
     Rigidbody rigidBody;
     ParticleSystem RocketJetParticles;
+    bool collisionDisabled = false; 
+    
  //'Rigidbody' is a variable type provided by unity. As it is a component added by us in the unity Engine
  // 'rigidBody' is the name of a member variable of type 'Rigidbody'.
   enum State { Alive, Dying, Transcending}
     State state = State.Alive;
-
     // Start is called before the first frame update
     void Start()
     {//Here we are telling machine to take value from Component Added in the engine for 'rigidBody'
@@ -44,7 +45,16 @@ public class Rocket : MonoBehaviour
             OnUserInput();
             PlayerRotation();
         }
+        RespondToDebugKeys();
     }
+
+    void RespondToDebugKeys()
+    {
+        if (Input.GetKeyDown(KeyCode.C)) 
+        { collisionDisabled = !collisionDisabled; }
+                                              //For toggling the collision of game object
+    }
+
   //"(Input.GetKey(KeyCode.Input))" is the syntax for getting the input from the user
   //"Input. GetKey" will repeatedly return the value which the user holds down the specified key.
   //'KeyCode.' is a command for specifying the key pressed.
@@ -78,6 +88,10 @@ public class Rocket : MonoBehaviour
             if (!audioSource.isPlaying)
                 audioSource.Play();
         }
+        else if (Input.GetKeyDown(KeyCode.L)) 
+        {
+            ChangingScene();
+        }
 
         else
         {            
@@ -102,8 +116,8 @@ public class Rocket : MonoBehaviour
     void OnCollisionEnter(Collision collision)// Method to respond on collision provided by Unity
     {// For Tagging we give the game object a Tag name, and to make it respond on an input we use switch statement
         
-        if (state != State.Alive)// '!=' - it is 'not equal to'
-        {
+        if (state != State.Alive || collisionDisabled)// '!=' - it is 'not equal to'
+        {                    // '||' Means 'or'
             return;//'return' is a command telling the method not to give output further than that if the condition follows
         }
 
@@ -126,10 +140,10 @@ public class Rocket : MonoBehaviour
                 GoToLevel5();
                 break;
             case "Finish 5":
-                GoToLevel5();
+                GoToLevel1();
                 break;
             default:
-                 DeathSequence();
+                DeathSequence();
                 break;
         }
     }
@@ -155,16 +169,21 @@ public class Rocket : MonoBehaviour
     }
 
     void ChangingScene2()
-    {
+    {        
         SceneManager.LoadScene(0);
     }
 
-    void ChangingScene()
-    {
-        SceneManager.LoadScene(1);
-     //'SceneManager' is to use the 'UnityEngine.SceneManagement' package, which is for managemnt of the scenes added to builded scenes
-     //'.LoadScene()' is a command given to the system to load the scene number specified in the bracket
-     // syntax to change scene in unity 'SceneManager.LoadScene();'
+    void ChangingScene()//"buildIndex"Returns the index of the Scene in the Build Settings.
+    {//"GetActiveScene" Gets the currently active Scene.
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+        SceneManager.LoadScene(nextSceneIndex);
+        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings) { nextSceneIndex = 0; }// Loop Back to Scene 0 or Level 1
+        SceneManager.LoadScene(nextSceneIndex);
+        //"sceneCountInBuildSettings" Last Scene in Build Settings.
+        //'SceneManager' is to use the 'UnityEngine.SceneManagement' package, which is for managemnt of the scenes added to builded scenes
+        //'.LoadScene()' is a command given to the system to load the scene number specified in the bracket
+        // syntax to change scene in unity 'SceneManager.LoadScene();'
     }
     void GoToLevel3()
     {
@@ -208,5 +227,15 @@ public class Rocket : MonoBehaviour
     void ChangingScene5()
     {
         SceneManager.LoadScene(4);
+    }
+
+    void GoToLevel1() 
+    {
+        state = State.Transcending;//'Invoke' is a key word to execute a method after some time        
+        audioSource.Stop();
+        audioSource.PlayOneShot(levelclear);
+        successParticles.Play();
+        Invoke("ChangingScene2", 2f);//Syntax to use invoke 'Invoke("MethodName", Time);' (Time should be in seconds and the value should be a float value)
+        print("Finish");
     }
 }
