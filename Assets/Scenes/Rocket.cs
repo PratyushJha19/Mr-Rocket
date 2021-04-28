@@ -7,7 +7,7 @@ public class Rocket : MonoBehaviour
 {   //Member Variables Declared Below
     //The [SerializeField] attribute is used to mark non-public fields as serializable: so that Unity can save and load those values
     [SerializeField] float mainThrust = 100f;
-    [SerializeField] float rcsThrust = 100f; //"[SerializeFlield]" is to load values in the engine with the name of variable declared
+    [SerializeField] float rcsThrust = 10f; //"[SerializeFlield]" is to load values in the engine with the name of variable declared
     [SerializeField] float LevelLoadTime = 2f;
 
     [SerializeField] AudioClip mainEngine; //AudioClip is a Variable type Given by unity which itself takes audio in the engine not values
@@ -18,7 +18,7 @@ public class Rocket : MonoBehaviour
     [SerializeField] ParticleSystem successParticles;
     [SerializeField] ParticleSystem deathParticles;
 
-    AudioSource audioSource;// It is same as Rigidbody
+    AudioSource audioSource;// It is same as Rigidbody 
     Rigidbody rigidBody;
     ParticleSystem RocketJetParticles;
     bool collisionDisabled = false; 
@@ -60,12 +60,11 @@ public class Rocket : MonoBehaviour
   //'KeyCode.' is a command for specifying the key pressed.
   //"rigidBody.AddRelativeForce(Vector3.direction);" syntax for making an object or player move
   //rigidBody is the variable name used here. Any variable name can be used here at its place.
-    void OnUserInput()
-    {
-        float movementOfFrame = mainThrust * Time.deltaTime;
+    void OnUserInput() 
+    { 
         if (Input.GetKey(KeyCode.W))
         {
-            rigidBody.AddRelativeForce(Vector3.up * movementOfFrame);
+            rigidBody.AddRelativeForce(Vector3.up * mainThrust);
             if (!audioSource.isPlaying) //here '!' means not. Here not can also be shown as '(audio.isPlaying == false)'.
             {
                 audioSource.PlayOneShot(mainEngine); //To remember - for playing an audio added in the engine inspector use '.PlayOneshot(variableName)'
@@ -73,18 +72,21 @@ public class Rocket : MonoBehaviour
             mainEngineParticles.Play();
         }
         else if (Input.GetKey(KeyCode.S))
-            rigidBody.AddRelativeForce(Vector3.down * movementOfFrame);
+            rigidBody.AddRelativeForce(Vector3.down * mainThrust);
 
         else if (Input.GetKey(KeyCode.A))
         {
-            rigidBody.AddRelativeForce(Vector3.right * movementOfFrame);
+            rigidBody.AddRelativeForce(Vector3.right * mainThrust);
             if (!audioSource.isPlaying)
                 audioSource.Play();
         }
 
+        else if (Input.GetKey(KeyCode.A))
+            audioSource.Play();
+
         else if (Input.GetKey(KeyCode.D))
         {
-            rigidBody.AddRelativeForce(Vector3.left * movementOfFrame);
+            rigidBody.AddRelativeForce(Vector3.left * mainThrust);
             if (!audioSource.isPlaying)
                 audioSource.Play();
         }
@@ -102,26 +104,23 @@ public class Rocket : MonoBehaviour
          
     void PlayerRotation()
     {
-        float rotationOfFrame = rcsThrust * Time.deltaTime;
         rigidBody.freezeRotation = true; // for taking manual rotation control
         if (Input.GetKey(KeyCode.Q))
-            transform.Rotate(Vector3.back * rotationOfFrame);
+            transform.Rotate(Vector3.back * rcsThrust);
 
         else if (Input.GetKey(KeyCode.E))
-            transform.Rotate(Vector3.forward * rotationOfFrame);
+            transform.Rotate(Vector3.forward * rcsThrust);
         rigidBody.freezeRotation = false; // giving rotation control back to physics
     }
 
     // 'Collison' is a variable type provided by unity for collision of any game object
     void OnCollisionEnter(Collision collision)// Method to respond on collision provided by Unity
     {// For Tagging we give the game object a Tag name, and to make it respond on an input we use switch statement
-        
-        if (state != State.Alive || collisionDisabled)// '!=' - it is 'not equal to'
-        {                    // '||' Means 'or'
-            return;//'return' is a command telling the method not to give output further than that if the condition follows
-        }
 
-        switch (collision.gameObject.tag)//Tagging Game Objects,Syntax-'(variableName.gameObject.tag)'
+        if (state != State.Alive || collisionDisabled)                // '!=' - it is 'not equal to'
+        { return; }
+                                 // '||' Means 'or'   //'return' is a command telling the method not to give output further than that if the condition follows
+        switch (collision.gameObject.tag)  //Tagging Game Objects,Syntax-'(variableName.gameObject.tag)'
         {
             case "Friendly": 
                 break;

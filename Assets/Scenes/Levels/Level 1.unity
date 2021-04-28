@@ -601,6 +601,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: AtomRocket
       objectReference: {fileID: 0}
+    - target: {fileID: 6686143778392319305, guid: d66747ee1a436234284b42ff679548d5,
+        type: 3}
+      propertyPath: rcsThrust
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6686143778392319305, guid: d66747ee1a436234284b42ff679548d5,
+        type: 3}
+      propertyPath: mainThrust
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 6686143778392319305, guid: d66747ee1a436234284b42ff679548d5,
+        type: 3}
+      propertyPath: LevelLoadTime
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8963174565439094750, guid: d66747ee1a436234284b42ff679548d5,
         type: 3}
       propertyPath: m_RootOrder
@@ -963,6 +978,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8422133079085849120, guid: 7cefa76ffddb7c248a8f0e5b46e3ebb4,
         type: 3}
+      propertyPath: m_Intensity
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8422133079085849120, guid: 7cefa76ffddb7c248a8f0e5b46e3ebb4,
+        type: 3}
       propertyPath: m_ShadowAngle
       value: 0
       objectReference: {fileID: 0}
@@ -974,7 +994,12 @@ PrefabInstance:
     - target: {fileID: 8422133079085849120, guid: 7cefa76ffddb7c248a8f0e5b46e3ebb4,
         type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8422133079085849120, guid: 7cefa76ffddb7c248a8f0e5b46e3ebb4,
+        type: 3}
+      propertyPath: m_BounceIntensity
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8422133079085849120, guid: 7cefa76ffddb7c248a8f0e5b46e3ebb4,
         type: 3}

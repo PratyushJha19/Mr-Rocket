@@ -670,6 +670,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: AtomRocket
       objectReference: {fileID: 0}
+    - target: {fileID: 1166208618532147547, guid: bfa3f6eb4ec975045bd35cee7d31b2f9,
+        type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6686143778392319305, guid: bfa3f6eb4ec975045bd35cee7d31b2f9,
+        type: 3}
+      propertyPath: rcsThrust
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6686143778392319305, guid: bfa3f6eb4ec975045bd35cee7d31b2f9,
+        type: 3}
+      propertyPath: mainThrust
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 6686143778392319305, guid: bfa3f6eb4ec975045bd35cee7d31b2f9,
         type: 3}
       propertyPath: successParticles

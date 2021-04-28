@@ -1,19 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+// vector3 is for the position of the game object under the transform component
+// here 'transform' is the component with the game object in the engine
+//And 'position' is the one of the part of transform component in the unity engine 
 public class Oscillator : MonoBehaviour
-{// vector3 is for the position of the game object under the transform component
+{
     [SerializeField] Vector3 positionVector = new Vector3(10f, 10f, 10f);
     [SerializeField] float period = 2f;
     [Range(0, 2)] [SerializeField] float positionFactor;
     Vector3 startingPosition;
         // Start is called before the first frame update
-    void Start()
-    {
-        startingPosition = transform.position;// here 'transform' is the component with the game object in the engine
-        //And 'position' is the one of the part of transform component in the unity engine 
-    }
+    void Start() {startingPosition = transform.position;}
 
     // Update is called once per frame
     void Update()
