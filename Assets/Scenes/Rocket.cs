@@ -22,11 +22,12 @@ public class Rocket : MonoBehaviour
     Rigidbody rigidBody;
     ParticleSystem RocketJetParticles;
     bool collisionDisabled = false; 
-    
- //'Rigidbody' is a variable type provided by unity. As it is a component added by us in the unity Engine
- // 'rigidBody' is the name of a member variable of type 'Rigidbody'.
-  enum State { Alive, Dying, Transcending}
+    //'Rigidbody' is a variable type provided by unity. As it is a component added by us in the unity Engine
+    // 'rigidBody' is the name of a member variable of type 'Rigidbody'.
+  
+    enum State { Alive, Dying, Transcending}
     State state = State.Alive;
+    
     // Start is called before the first frame update
     void Start()
     {//Here we are telling machine to take value from Component Added in the engine for 'rigidBody'
@@ -52,7 +53,7 @@ public class Rocket : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C)) 
         { collisionDisabled = !collisionDisabled; }
-                                              //For toggling the collision of game object
+        //For toggling the collision of game object
     }
 
   //"(Input.GetKey(KeyCode.Input))" is the syntax for getting the input from the user
