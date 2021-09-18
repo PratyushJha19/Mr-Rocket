@@ -49,7 +49,7 @@ public class Rocket : MonoBehaviour
         RespondToDebugKeys();
     }
 
-    void RespondToDebugKeys()
+    void  RespondToDebugKeys()
     {
         if (Input.GetKeyDown(KeyCode.C)) 
         { collisionDisabled = !collisionDisabled; }
